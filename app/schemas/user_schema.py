@@ -15,10 +15,10 @@ class UserSchema(Schema):
             "required": "La contraseña es requerida"
         }
     )
-    name = fields.Str(
+    email = fields.Str(
         required=True,
         validate=lambda x: "@utma.edu.mx" in x,
         error_messages={
-            "required": "El nombre es requerido"
+            "required": "El correo es requerido"
         }
     )
