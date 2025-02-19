@@ -1,0 +1,21 @@
+maldito nuncio
+Los Controladores se encargan de conectar al usuario a la base de datos. Van al schema a validar y después pasa la información a la base de datos
+
+La clase padre tiene 5 metodos(get one, get all, update, delete, create)
+tiene 3 hijos: users, pokemon t poke_fav y ellos adoptan los metodos del padre
+en poke_fav no implementa get one y update
+en pokemon no implementa update, create, delete
+
+en factory buscamos modelos por ejemplo get model favoritos().get_all
+buscar en el factory tiene mas escabilidad(busca clases)
+
+__init__ es un constructor que pide una coleccion segun cual elijamos 
+la clase padre necesita funcionalidad osea la coleccion 
+el hijo no tiene constructor porque el padre ya lo tiene para llamar las colecciones
+
+la funcion de object_id es para hacer un id unico y diferente 
+
+
+cada modulo tiene su propia url
+
+el blueprint

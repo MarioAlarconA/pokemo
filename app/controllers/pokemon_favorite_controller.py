@@ -3,7 +3,41 @@ Elimina
 Modifica la clase del modelo y evitar que se usen metodos indevidos """
 
 from flask import Blueprint, request, jsonify 
+from app.tools.response_manager import ResponseManager
 from app.schemas.poke_fav_schema import PokeFavSchema
+from bson import ObjectId
+from marshmallow import ValidationError
+from app.models.factory import  ModelFactory
+
+bp = Blueprint("pokemon_favorite", __name__, url_prefix="/pokemons-favorites")
+RM = ResponseManager()
+FP_MODEL = ModelFactory.get_model("pokemons_favorites")
+FP_SCHEMA = PokeFavSchema()
+
+@bp.route ("/", methods=["POST"])
+def create ():
+    try:
+        data = request.json
+        data = FP_SCHEMA.validate(data)
+        fp = FP_MODEL.create(data)
+        return RM.success({"_id": fp})
+    except ValidationError as err:
+        print(err)
+        return RM.error("Envia todos lo parametros")
+    
+
+@bp.route("/<string:id>", methods=["DELETE"])
+def delete(id):
+    FP_MODEL.delete(ObjectId(id))
+    return RM.success("Pokemon eliminado con exito")
+
+@bp.route("/<string:user_id>", methods=["GET"])
+def get_all(user_id):
+    data = FP_MODEL.find_all()
+    return RM.success(data)
+
+
+""" from app.schemas.poke_fav_schema import PokeFavSchema
 from marshmallow import ValidationError
 from app.models.factory import ModelFactory
 from bson import ObjectId
@@ -31,4 +65,4 @@ def delete(pokemon_id):
 @bp.route("/get_pokemons/", methods=["GET"])
 def get_pokemon():
     pokemon = pokemon_favorite_model.find_all()
-    return jsonify(pokemon, 200)
+    return jsonify(pokemon, 200) """
