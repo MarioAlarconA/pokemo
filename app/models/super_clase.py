@@ -25,6 +25,7 @@ class SuperClass:
         },{
             "$set":data
         })
+        datum["_id"] = str(datum["_id"])
         return datum
     
     def delete(self, object_id):

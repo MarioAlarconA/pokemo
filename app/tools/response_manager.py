@@ -1,23 +1,23 @@
 from flask import jsonify
 
+
+
 class ResponseManager:
-    def success(self, data):
-        if type(data) == "str":
-            data = {
+    def succes(self, data):
+        if isinstance(data, str) == "str":
+            data ={
                 "message":data
             }
-        return jsonify(data), 200
-    
-    def error(self, data="Invalid request"):
-        if type(data) == "str":
-            data = {
+        return jsonify(data),200
+    def error(self, data="invalid request"):
+        if isinstance(data, str) == "str":
+            data ={
                 "message":data
             }
-        return jsonify(data), 400
-    
+        return jsonify(data),400
     def error_server(self, data="SERVER ERROR"):
-        if type(data) == "str":
-            data = {
+        if isinstance(data, str) == "str":
+            data ={
                 "message":data
             }
-        return jsonify(data), 500
+        return jsonify(data),500
