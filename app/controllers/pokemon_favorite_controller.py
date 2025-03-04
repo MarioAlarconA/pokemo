@@ -18,9 +18,11 @@ FP_SCHEMA = PokeFavSchema()
 @bp.route ("/", methods=["POST"])
 @jwt_required()
 def create ():
+    user_id = get_jwt_identity()
     try:
         data = request.json
-        data = FP_SCHEMA.validate(data)
+        data = FP_SCHEMA.load(data)
+        data["user_id"] = user_id
         fp = FP_MODEL.create(data)
         return RM.success({"_id": fp})
     except ValidationError as err:

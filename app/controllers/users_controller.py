@@ -38,24 +38,30 @@ def register():
     except ValidationError as err:
         return RM.error("Los Parametros enviados son incorrectos")
 
-@bp.route("/update/<string:user_id>", methods={"PUT"})
+@bp.route("/update", methods={"PUT"})
+@jwt_required()
 def update():
     user_id = get_jwt_identity()
     try:
         data = user_schema.load(request.json)
+        data["password"]= EM.create_hash(data["password"])
         user = user_model.update(ObjectId(user_id), data)
         return RM.succes({"data":user})
     except ValidationError as err:
         return RM.error("Los parametros enviados son incorrectos")
 
-@bp.route("/dalete/<string:user_id>", methods={"DELETE"})
+@bp.route("/delete", methods={"DELETE"})
+@jwt_required()
 def delete():
     user_id = get_jwt_identity()
     user_model.delete(ObjectId(user_id))
     return RM.succes("Usuarios Eliminado")
 
-@bp.route("/get/<string:user_id>", methods={"GET"})
+@bp.route("/get", methods={"GET"})
+@jwt_required()
 def get_user():
     user_id = get_jwt_identity()
     user = user_model.find_by_id(ObjectId(ObjectId))
+    if not user:
+        return RM.error("El usuario no existe")
     return RM.succes(user)
