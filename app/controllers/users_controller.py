@@ -17,7 +17,7 @@ user_model = ModelFactory.get_model("users")
 def login():
     data = request.json
     email = data.get("email",None)
-    password = data.get("paswword", None)
+    password = data.get("password", None)
     if not email or not password:
         return RM.error("Falta Contraseña/Correo")
     user = user_model.get_by_email_password(email,password)
