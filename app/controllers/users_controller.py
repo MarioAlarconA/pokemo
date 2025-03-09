@@ -13,20 +13,19 @@ bp = Blueprint("users", __name__, url_prefix="/users")
 user_schema = UserSchema()
 user_model = ModelFactory.get_model("users")
 
-@bp.route("/login",methods=["POST"])
+@bp.route("/login", methods = ["POST"])
 def login():
     data = request.json
-    email = data.get("email",None)
+    email = data.get("email", None)
     password = data.get("password", None)
     if not email or not password:
-        return RM.error("Falta Contraseña/Correo")
-    user = user_model.get_by_email_password(email,password)
-    if not user:
-        return RM.error("No existe el usuario")
-    if not EM.compare_hashes(password, user["password"]):
-        return RM.error("Credenciales invalidas")
-    return RM.succes({"user":user,"token":create_access_token(user["_id"])})
-
+        return RM.error("Es necesario enviar todas las credenciales")
+    user = user_model.get_by_email_password(email)
+    if not user :
+        return RM.error("No se encontro un usuario")
+    if not EM.compare_hashes(password,  user["password"]):
+        return RM.error("Credenciales Invalidas")
+    return RM.succes({"user": user, "token": create_access_token(user["_id"])})
 
 @bp.route("/register", methods=["POST"])
 def register():
@@ -57,11 +56,10 @@ def delete():
     user_model.delete(ObjectId(user_id))
     return RM.succes("Usuarios Eliminado")
 
-@bp.route("/get", methods={"GET"})
+@bp.route("/get/<string:user_id>", methods={"GET"})
 @jwt_required()
-def get_user():
-    user_id = get_jwt_identity()
-    user = user_model.find_by_id(ObjectId(ObjectId))
+def get_user(user_id):
+    user = user_model.find_by_id(ObjectId(user_id))
     if not user:
         return RM.error("El usuario no existe")
     return RM.succes(user)

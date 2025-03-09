@@ -24,7 +24,7 @@ def create ():
         data = FP_SCHEMA.load(data)
         data["user_id"] = user_id
         fp = FP_MODEL.create(data)
-        return RM.success({"_id": fp})
+        return RM.succes({"_id": fp})
     except ValidationError as err:
         print(err)
         return RM.error("Envia todos lo parametros")
@@ -34,11 +34,11 @@ def create ():
 @jwt_required()
 def delete(id):
     FP_MODEL.delete(ObjectId(id))
-    return RM.success("Pokemon eliminado con exito")
+    return RM.succes("Pokemon eliminado con exito")
 
 @bp.route("/", methods=["GET"])
 @jwt_required()
 def get_all():
     user_id = get_jwt_identity()
     data = FP_MODEL.find_all(user_id)
-    return RM.success(data)
+    return RM.succes(data)

@@ -20,7 +20,7 @@ class PokemonFavorites(SuperClass):
         data = list(self.collection.find({"user_id": ObjectId(user_id)}))
         for datum in data:
             datum["user_id"] = str(datum["user_id"])
-            datum["pokemons_id"] = str(datum["pokemons_id"])
+            datum["pokemon_id"] = str(datum["pokemon_id"])
             datum["_id"] = str(datum["_id"])
         return data
     
