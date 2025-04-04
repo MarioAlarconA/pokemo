@@ -19,8 +19,8 @@ export default function App() {
       </View>
 
       <View>
-        <Text>Olvidaste tu contraseña</Text>
-        <Text>Registrate</Text>
+        <Text style={styles.containerFooter.texts}>Olvidaste tu contraseña</Text>
+        <Text style={styles.containerFooter.texts}>Registrate</Text>
       </View>
 
     </View>
@@ -64,6 +64,15 @@ const styles = StyleSheet.create({
       color:"black",
       fontSize: 20,
       fontWeight: "bold",
+    }
+  },
+
+  containerFooter:{
+    justifyContent: "center",
+    alignItems: "center",
+    texts:{
+      fontSize: 20,
+      margin: 5
     }
   }
 });
