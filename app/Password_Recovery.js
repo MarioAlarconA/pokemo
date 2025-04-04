@@ -9,18 +9,10 @@ export default function App() {
       </View>
 
       <View>
-        <Text style={styles.title}>Registrate</Text>
-        <Text style={styles.label}>Nombre</Text>
+        <Text style={styles.title}>Recuperar contraseña</Text>
+        <Text style={styles.label}>Ingresa tu correo para restablecer tu contraseña</Text>
         <TextInput style={styles.input}></TextInput>
-        <Text style={styles.label}>Correo</Text>
-        <TextInput style={styles.input}></TextInput>
-        <Text style={styles.label}>Contraseña</Text>
-        <TextInput style={styles.input}></TextInput>
-        <Pressable style={styles.send}><Text>Enviar</Text></Pressable>
-      </View>
-
-      <View>
-        <Text style={styles.containerFooter.texts}>Iniciar Sesión</Text>
+        <Pressable style={styles.send}><Text>Subir</Text></Pressable>
       </View>
 
     </View>
@@ -64,15 +56,6 @@ const styles = StyleSheet.create({
       color:"black",
       fontSize: 20,
       fontWeight: "bold",
-    }
-  },
-
-  containerFooter:{
-    justifyContent: "center",
-    alignItems: "center",
-    texts:{
-      fontSize: 20,
-      margin: 5
     }
   }
 });

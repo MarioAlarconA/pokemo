@@ -1,28 +1,19 @@
-import { StyleSheet, Text, View, Image, TextInput, Pressable } from 'react-native';
+import { StyleSheet, Text, View, TextInput, Pressable } from 'react-native';
 
 export default function App() {
   return (
     <View style={styles.container}>
 
       <View>
-        <Image source={{uri : "https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Pok%C3%A9_Ball_icon.svg/2052px-Pok%C3%A9_Ball_icon.svg.png"}} width={200} height={200}></Image>
-      </View>
-
-      <View>
-        <Text style={styles.title}>Registrate</Text>
-        <Text style={styles.label}>Nombre</Text>
+        <Text style={styles.title}>Actualiza tu información</Text>
+        <Text style={styles.label}>Edita tu nombre:</Text>
         <TextInput style={styles.input}></TextInput>
-        <Text style={styles.label}>Correo</Text>
+        <Text style={styles.label}>Edita tu correo:</Text>
         <TextInput style={styles.input}></TextInput>
-        <Text style={styles.label}>Contraseña</Text>
+        <Text style={styles.label}>Edita tu contraseña:</Text>
         <TextInput style={styles.input}></TextInput>
-        <Pressable style={styles.send}><Text>Enviar</Text></Pressable>
+        <Pressable style={styles.send}><Text>Subir</Text></Pressable>
       </View>
-
-      <View>
-        <Text style={styles.containerFooter.texts}>Iniciar Sesión</Text>
-      </View>
-
     </View>
   );
 }
@@ -64,15 +55,6 @@ const styles = StyleSheet.create({
       color:"black",
       fontSize: 20,
       fontWeight: "bold",
-    }
-  },
-
-  containerFooter:{
-    justifyContent: "center",
-    alignItems: "center",
-    texts:{
-      fontSize: 20,
-      margin: 5
     }
   }
 });
